@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AnnotationWindow</class>
+ <widget class="QMainWindow" name="AnnotationWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x><y>0</y><width>1400</width><height>900</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>水坑检测 — 图像标注工具</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <!-- btn_draw / btn_select are referenced in cpp but hidden (tool handled in toolbar) -->
+  <widget class="QPushButton" name="btn_draw">
+   <property name="text"><string>✏️ 绘制</string></property>
+   <property name="checkable"><bool>true</bool></property>
+   <property name="visible"><bool>false</bool></property>
+  </widget>
+  <widget class="QPushButton" name="btn_select">
+   <property name="text"><string>🖱 选择</string></property>
+   <property name="checkable"><bool>true</bool></property>
+   <property name="checked"><bool>true</bool></property>
+   <property name="visible"><bool>false</bool></property>
+  </widget>
+  <widget class="QLabel" name="m_lblInfo">
+   <property name="text"><string>就绪</string></property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

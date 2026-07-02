@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['puddle']
+
+roboflow:
+  workspace: hanyang-university-bd2kb
+  project: puddle-detection
+  version: 36
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/hanyang-university-bd2kb/puddle-detection/dataset/36

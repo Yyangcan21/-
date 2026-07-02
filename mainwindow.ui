@@ -1,0 +1,1473 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1100</width>
+    <height>900</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>水坑检测 - 模型训练与标注工具</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="mainLayout">
+    <property name="spacing">
+     <number>6</number>
+    </property>
+    <property name="leftMargin">
+     <number>8</number>
+    </property>
+    <property name="topMargin">
+     <number>8</number>
+    </property>
+    <property name="rightMargin">
+     <number>8</number>
+    </property>
+    <property name="bottomMargin">
+     <number>8</number>
+    </property>
+
+    <!-- ===== 标签页 ===== -->
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <property name="tabsClosable">
+       <bool>false</bool>
+      </property>
+
+      <!-- ===== 页签1：模型训练 ===== -->
+      <widget class="QWidget" name="tab_training">
+       <attribute name="title">
+        <string>🚀 模型训练</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="vLayout_training">
+        <property name="spacing">
+         <number>8</number>
+        </property>
+        <property name="leftMargin">
+         <number>6</number>
+        </property>
+        <property name="topMargin">
+         <number>6</number>
+        </property>
+        <property name="rightMargin">
+         <number>6</number>
+        </property>
+        <property name="bottomMargin">
+         <number>6</number>
+        </property>
+
+        <!-- 数据集 & 模型 -->
+        <item>
+         <widget class="QGroupBox" name="groupBox_data">
+          <property name="title">
+           <string>📁 数据集 &amp; 模型选择</string>
+          </property>
+          <layout class="QFormLayout" name="formLayout_data">
+           <property name="leftMargin"><number>10</number></property>
+           <property name="topMargin"><number>10</number></property>
+           <property name="rightMargin"><number>10</number></property>
+           <property name="bottomMargin"><number>10</number></property>
+           <property name="horizontalSpacing"><number>10</number></property>
+           <property name="verticalSpacing"><number>8</number></property>
+
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_dataset">
+             <property name="text"><string>数据集配置文件 (data.yaml)：</string></property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <layout class="QHBoxLayout">
+             <item>
+              <widget class="QLineEdit" name="lineEdit_dataset">
+               <property name="placeholderText"><string>请点击"浏览"按钮选择 data.yaml 文件...</string></property>
+               <property name="readOnly"><bool>true</bool></property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btn_selectDataset">
+               <property name="text"><string>📂 浏览</string></property>
+               <property name="minimumWidth"><number>80</number></property>
+               <property name="maximumWidth"><number>80</number></property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_model">
+             <property name="text"><string>预训练模型：</string></property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="combo_model">
+             <item><property name="text"><string>yolov8n.pt（最快，适合测试）</string></property></item>
+             <item><property name="text"><string>yolov8s.pt（小模型，平衡）</string></property></item>
+             <item><property name="text"><string>yolov8m.pt（中等模型）</string></property></item>
+             <item><property name="text"><string>yolov8l.pt（大模型，精度高）</string></property></item>
+             <item><property name="text"><string>yolov8x.pt（最大模型，最慢）</string></property></item>
+            </widget>
+           </item>
+
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_python">
+             <property name="text"><string>Python 解释器路径：</string></property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <layout class="QHBoxLayout">
+             <item>
+              <widget class="QLineEdit" name="lineEdit_python">
+               <property name="text"><string>D:/Python/dog/.venv/Scripts/python.exe</string></property>
+               <property name="placeholderText"><string>Python 可执行文件路径...</string></property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btn_selectPython">
+               <property name="text"><string>📂 浏览</string></property>
+               <property name="minimumWidth"><number>80</number></property>
+               <property name="maximumWidth"><number>80</number></property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+
+          </layout>
+         </widget>
+        </item>
+
+        <!-- 训练参数 -->
+        <item>
+         <widget class="QGroupBox" name="groupBox_params">
+          <property name="title">
+           <string>⚙️ 训练参数</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_params">
+           <property name="leftMargin"><number>10</number></property>
+           <property name="topMargin"><number>10</number></property>
+           <property name="rightMargin"><number>10</number></property>
+           <property name="bottomMargin"><number>10</number></property>
+           <property name="horizontalSpacing"><number>20</number></property>
+           <property name="verticalSpacing"><number>8</number></property>
+
+           <item row="0" column="0">
+            <widget class="QLabel" name="label_epoch">
+             <property name="text"><string>训练轮数 (Epochs)：</string></property>
+             <property name="alignment"><set>Qt::AlignRight|Qt::AlignVCenter</set></property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QSpinBox" name="spin_epoch">
+             <property name="minimum"><number>1</number></property>
+             <property name="maximum"><number>1000</number></property>
+             <property name="value"><number>50</number></property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QLabel" name="label_batch">
+             <property name="text"><string>批大小 (Batch Size)：</string></property>
+             <property name="alignment"><set>Qt::AlignRight|Qt::AlignVCenter</set></property>
+            </widget>
+           </item>
+           <item row="0" column="3">
+            <widget class="QSpinBox" name="spin_batch">
+             <property name="minimum"><number>1</number></property>
+             <property name="maximum"><number>256</number></property>
+             <property name="value"><number>16</number></property>
+            </widget>
+           </item>
+
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_lr">
+             <property name="text"><string>初始学习率 (lr0)：</string></property>
+             <property name="alignment"><set>Qt::AlignRight|Qt::AlignVCenter</set></property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QDoubleSpinBox" name="spin_lr">
+             <property name="decimals"><number>5</number></property>
+             <property name="minimum"><double>0.00001</double></property>
+             <property name="maximum"><double>1.00000</double></property>
+             <property name="singleStep"><double>0.00100</double></property>
+             <property name="value"><double>0.01000</double></property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QLabel" name="label_imgsz">
+             <property name="text"><string>图像尺寸 (imgsz)：</string></property>
+             <property name="alignment"><set>Qt::AlignRight|Qt::AlignVCenter</set></property>
+            </widget>
+           </item>
+           <item row="1" column="3">
+            <widget class="QComboBox" name="combo_imgsz">
+             <item><property name="text"><string>320</string></property></item>
+             <item><property name="text"><string>416</string></property></item>
+             <item><property name="text"><string>640</string></property></item>
+             <item><property name="text"><string>800</string></property></item>
+             <item><property name="text"><string>1024</string></property></item>
+            </widget>
+           </item>
+
+           <item row="2" column="0">
+            <widget class="QLabel" name="label_device">
+             <property name="text"><string>训练设备 (Device)：</string></property>
+             <property name="alignment"><set>Qt::AlignRight|Qt::AlignVCenter</set></property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QComboBox" name="combo_device">
+             <property name="currentIndex"><number>1</number></property>
+             <item><property name="text"><string>cpu（CPU训练）</string></property></item>
+             <item><property name="text"><string>0（GPU 0）</string></property></item>
+             <item><property name="text"><string>1（GPU 1）</string></property></item>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QLabel" name="label_workers">
+             <property name="text"><string>数据加载线程 (Workers)：</string></property>
+             <property name="alignment"><set>Qt::AlignRight|Qt::AlignVCenter</set></property>
+            </widget>
+           </item>
+           <item row="2" column="3">
+            <widget class="QSpinBox" name="spin_workers">
+             <property name="minimum"><number>0</number></property>
+             <property name="maximum"><number>16</number></property>
+             <property name="value"><number>4</number></property>
+            </widget>
+           </item>
+
+          </layout>
+         </widget>
+        </item>
+
+        <!-- 控制按钮 -->
+        <item>
+         <layout class="QHBoxLayout" name="hLayout_ctrl">
+          <item>
+           <widget class="QPushButton" name="btn_train">
+            <property name="text"><string>🚀 开始训练</string></property>
+            <property name="minimumHeight"><number>38</number></property>
+            <property name="styleSheet">
+             <string>QPushButton { background-color: #4CAF50; color: white; font-size: 14px; font-weight: bold; border-radius: 6px; }
+QPushButton:hover { background-color: #45a049; }
+QPushButton:disabled { background-color: #aaa; }</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_stop">
+            <property name="text"><string>⏹ 停止训练</string></property>
+            <property name="enabled"><bool>false</bool></property>
+            <property name="minimumHeight"><number>38</number></property>
+            <property name="styleSheet">
+             <string>QPushButton { background-color: #f44336; color: white; font-size: 14px; font-weight: bold; border-radius: 6px; }
+QPushButton:hover { background-color: #d32f2f; }
+QPushButton:disabled { background-color: #aaa; }</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_clearLog">
+            <property name="text"><string>🗑 清空日志</string></property>
+            <property name="minimumHeight"><number>38</number></property>
+            <property name="minimumWidth"><number>110</number></property>
+            <property name="maximumWidth"><number>110</number></property>
+            <property name="styleSheet">
+             <string>QPushButton { background-color: #607D8B; color: white; font-size: 13px; border-radius: 6px; }
+QPushButton:hover { background-color: #455A64; }</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer>
+            <property name="orientation">horizontal</property>
+            <property name="sizeHint"><size><width>40</width><height>0</height></size></property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+
+        <!-- 进度条 -->
+        <item>
+         <layout class="QHBoxLayout">
+          <item>
+           <widget class="QLabel" name="label_progress">
+            <property name="text"><string>训练进度：</string></property>
+            <property name="minimumWidth"><number>70</number></property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QProgressBar" name="progressBar">
+            <property name="value"><number>0</number></property>
+            <property name="format"><string>%v / %m 轮 (%p%)</string></property>
+            <property name="textVisible"><bool>true</bool></property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_status">
+            <property name="text"><string>等待开始</string></property>
+            <property name="minimumWidth"><number>120</number></property>
+            <property name="alignment"><set>Qt::AlignCenter</set></property>
+            <property name="styleSheet"><string>color: #888; font-weight: bold;</string></property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+
+        <!-- 日志 -->
+        <item>
+         <widget class="QGroupBox" name="groupBox_curve">
+          <property name="title">
+           <string>📈 训练曲线（实时绘制）</string>
+          </property>
+          <layout class="QVBoxLayout" name="vLayout_curve">
+           <property name="leftMargin"><number>6</number></property>
+           <property name="topMargin"><number>6</number></property>
+           <property name="rightMargin"><number>6</number></property>
+           <property name="bottomMargin"><number>6</number></property>
+           <item>
+            <widget class="LossCurveView" name="lossCurveView" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>200</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+
+        <!-- 日志 -->
+        <item>
+         <widget class="QGroupBox" name="groupBox_log">
+          <property name="title">
+           <string>📋 训练日志输出</string>
+          </property>
+          <layout class="QVBoxLayout" name="vLayout_log">
+           <property name="leftMargin"><number>6</number></property>
+           <property name="topMargin"><number>6</number></property>
+           <property name="rightMargin"><number>6</number></property>
+           <property name="bottomMargin"><number>6</number></property>
+           <item>
+            <widget class="QPlainTextEdit" name="text_log">
+             <property name="readOnly"><bool>true</bool></property>
+             <property name="minimumHeight"><number>160</number></property>
+             <property name="styleSheet">
+              <string>QPlainTextEdit { background-color: #1e1e1e; color: #d4d4d4; font-family: "Consolas", "Courier New", monospace; font-size: 12px; }</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+
+       </layout>
+      </widget>
+
+      <!-- ===== 页签2：图像标注 ===== -->
+      <widget class="QWidget" name="tab_annotation">
+       <attribute name="title">
+        <string>🏷 图像标注</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="vLayout_annotation">
+        <property name="spacing">
+         <number>6</number>
+        </property>
+        <property name="leftMargin">
+         <number>6</number>
+        </property>
+        <property name="topMargin">
+         <number>6</number>
+        </property>
+        <property name="rightMargin">
+         <number>6</number>
+        </property>
+        <property name="bottomMargin">
+         <number>6</number>
+        </property>
+
+        <!-- 标注工具栏 -->
+        <item>
+         <widget class="QToolBar" name="toolBar_annotation">
+          <property name="windowTitle">
+           <string>标注工具栏</string>
+          </property>
+          <property name="movable">
+           <bool>false</bool>
+          </property>
+          <attribute name="toolBarArea">
+           <enum>TopToolBarArea</enum>
+          </attribute>
+          <attribute name="toolBarBreak">
+           <bool>false</bool>
+          </attribute>
+         </widget>
+        </item>
+
+        <!-- 标注主区域：左侧文件列表 + 中间画布 + 右侧标签面板 -->
+        <item>
+         <layout class="QHBoxLayout" name="hLayout_annotMain">
+          <property name="spacing">
+           <number>6</number>
+          </property>
+
+          <!-- 左侧：文件列表 -->
+          <item>
+           <widget class="QGroupBox" name="groupBox_fileList">
+            <property name="title">
+             <string>📂 图片列表</string>
+            </property>
+            <property name="maximumWidth">
+             <number>180</number>
+            </property>
+            <layout class="QVBoxLayout" name="vLayout_fileList">
+             <property name="leftMargin"><number>4</number></property>
+             <property name="topMargin"><number>4</number></property>
+             <property name="rightMargin"><number>4</number></property>
+             <property name="bottomMargin"><number>4</number></property>
+             <item>
+              <widget class="QListWidget" name="listWidget_images">
+               <property name="uniformItemSizes">
+                <bool>false</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout">
+               <item>
+                <widget class="QPushButton" name="btn_annotOpenFolder">
+                 <property name="text"><string>📂 打开文件夹</string></property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <layout class="QHBoxLayout">
+               <item>
+                <widget class="QPushButton" name="btn_annotPrev">
+                 <property name="text"><string>◀ 上一张</string></property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btn_annotNext">
+                 <property name="text"><string>下一张 ▶</string></property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+
+          <!-- 中间：画布区域 -->
+          <item>
+           <widget class="QWidget" name="widget_canvasContainer">
+            <layout class="QVBoxLayout" name="vLayout_canvas">
+             <property name="spacing">
+              <number>4</number>
+             </property>
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="AnnotationView" name="annotationView">
+               <property name="minimumSize">
+                <size>
+                 <width>640</width>
+                 <height>480</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+
+          <!-- 右侧：标签管理 -->
+          <item>
+           <widget class="QGroupBox" name="groupBox_labels">
+            <property name="title">
+             <string>🏷 标签管理</string>
+            </property>
+            <property name="maximumWidth">
+             <number>200</number>
+            </property>
+            <layout class="QVBoxLayout" name="vLayout_labels">
+             <property name="leftMargin"><number>4</number></property>
+             <property name="topMargin"><number>4</number></property>
+             <property name="rightMargin"><number>4</number></property>
+             <property name="bottomMargin"><number>4</number></property>
+             <item>
+              <widget class="QTableView" name="tableView_labels">
+               <property name="minimumHeight">
+                <number>150</number>
+               </property>
+               <property name="maximumHeight">
+                <number>200</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout">
+               <item>
+                <widget class="QPushButton" name="btn_annotAddLabel">
+                 <property name="text"><string>➕ 添加标签</string></property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btn_annotDelLabel">
+                 <property name="text"><string>🗑 删除</string></property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <spacer>
+               <property name="orientation">vertical</property>
+               <property name="sizeHint"><size><width>0</width><height>6</height></size></property>
+              </spacer>
+             </item>
+             <!-- 标注信息列表（每个框一行：类别 + 归一化坐标 + 像素坐标） -->
+             <item>
+              <widget class="QGroupBox" name="groupBox_annotInfo">
+               <property name="title">
+                <string>📋 标注信息列表</string>
+               </property>
+               <layout class="QVBoxLayout" name="vLayout_annotInfo">
+                <property name="leftMargin"><number>4</number></property>
+                <property name="topMargin"><number>4</number></property>
+                <property name="rightMargin"><number>4</number></property>
+                <property name="bottomMargin"><number>4</number></property>
+                <item>
+                 <widget class="QListWidget" name="listWidget_annotInfo">
+                  <property name="minimumHeight">
+                   <number>120</number>
+                  </property>
+                  <property name="maximumHeight">
+                   <number>200</number>
+                  </property>
+                  <property name="alternatingRowColors">
+                   <bool>true</bool>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Consolas</family>
+                    <pointsize>9</pointsize>
+                   </font>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout">
+                  <item>
+                   <widget class="QPushButton" name="btn_annotChangeLabel">
+                    <property name="text"><string>🔄 改选中框类别</string>
+                    </property>
+                    <property name="toolTip">
+                     <string>把当前选中的标注框改成右侧标签表里选中的类别</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <spacer>
+               <property name="orientation">vertical</property>
+               <property name="sizeHint"><size><width>0</width><height>6</height></size></property>
+              </spacer>
+             </item>
+             <!-- YOLO 自动标注 -->
+             <item>
+              <widget class="QGroupBox" name="groupBox_autoLabel">
+               <property name="title">
+                <string>🤖 YOLO 自动标注</string>
+               </property>
+               <layout class="QVBoxLayout" name="vLayout_autoLabel">
+                <property name="leftMargin"><number>4</number></property>
+                <property name="topMargin"><number>4</number></property>
+                <property name="rightMargin"><number>4</number></property>
+                <property name="bottomMargin"><number>4</number></property>
+                <item>
+                 <widget class="QPushButton" name="btn_annotSelectModel">
+                  <property name="text"><string>📦 选择模型文件</string></property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="label_modelPath">
+                  <property name="text"><string>未选择模型</string></property>
+                  <property name="wordWrap">
+                   <bool>true</bool>
+                  </property>
+                  <property name="styleSheet"><string>color: #888; font-size: 11px;</string></property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="btn_annotAutoLabel">
+                  <property name="text"><string>⚡ 自动标注当前图</string></property>
+                 </widget>
+                </item>
+               </layout>
+              </widget>
+             </item>
+             <item>
+              <spacer>
+               <property name="orientation">vertical</property>
+               <property name="sizeHint"><size><width>0</width><height>10</height></size></property>
+              </spacer>
+             </item>
+             <!-- 保存按钮 -->
+             <item>
+              <widget class="QPushButton" name="btn_annotSave">
+               <property name="text"><string>💾 保存标注</string></property>
+               <property name="styleSheet">
+                <string>QPushButton { background-color: #2196F3; color: white; font-weight: bold; border-radius: 4px; }
+QPushButton:hover { background-color: #1976D2; }</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+
+         </layout>
+        </item>
+
+       </layout>
+      </widget>
+
+      <!-- ===== 页签3：模型量化与推理 ===== -->
+      <widget class="QWidget" name="tab_quant">
+       <attribute name="title">
+        <string>⚡ 模型量化与推理</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="vLayout_quant">
+        <property name="spacing"><number>8</number></property>
+        <property name="leftMargin"><number>6</number></property>
+        <property name="topMargin"><number>6</number></property>
+        <property name="rightMargin"><number>6</number></property>
+        <property name="bottomMargin"><number>6</number></property>
+
+        <!-- 上半部分：左=量化参数  右=推理 -->
+        <item>
+         <layout class="QHBoxLayout" name="hLayout_quantTop">
+          <property name="spacing"><number>8</number></property>
+
+          <!-- ====== 左侧：量化参数区域 ====== -->
+          <item>
+           <widget class="QGroupBox" name="groupBox_quantParams">
+            <property name="title"><string>🔧 模型量化参数</string></property>
+            <layout class="QFormLayout" name="formLayout_quant">
+             <property name="leftMargin"><number>10</number></property>
+             <property name="topMargin"><number>10</number></property>
+             <property name="rightMargin"><number>10</number></property>
+             <property name="bottomMargin"><number>10</number></property>
+             <property name="horizontalSpacing"><number>10</number></property>
+             <property name="verticalSpacing"><number>8</number></property>
+
+             <!-- 源模型 -->
+             <item row="0" column="0">
+              <widget class="QLabel"><property name="text"><string>源模型 (.pt)：</string></property></widget>
+             </item>
+             <item row="0" column="1">
+              <layout class="QHBoxLayout">
+               <item>
+                <widget class="QLineEdit" name="lineEdit_quantModel">
+                 <property name="placeholderText"><string>选择训练好的 best.pt 文件...</string></property>
+                 <property name="readOnly"><bool>true</bool></property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btn_quantSelectModel">
+                 <property name="text"><string>📂 浏览</string></property>
+                 <property name="maximumWidth"><number>80</number></property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+
+             <!-- 校准图片目录 -->
+             <item row="1" column="0">
+              <widget class="QLabel"><property name="text"><string>校准图片目录：</string></property></widget>
+             </item>
+             <item row="1" column="1">
+              <layout class="QHBoxLayout">
+               <item>
+                <widget class="QLineEdit" name="lineEdit_quantCalib">
+                 <property name="placeholderText"><string>静态量化时使用，可留空（使用动态量化）</string></property>
+                 <property name="readOnly"><bool>true</bool></property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btn_quantSelectCalib">
+                 <property name="text"><string>📂 浏览</string></property>
+                 <property name="maximumWidth"><number>80</number></property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+
+             <!-- 输出目录 -->
+             <item row="2" column="0">
+              <widget class="QLabel"><property name="text"><string>输出目录：</string></property></widget>
+             </item>
+             <item row="2" column="1">
+              <layout class="QHBoxLayout">
+               <item>
+                <widget class="QLineEdit" name="lineEdit_quantOutput">
+                 <property name="text"><string>D:/YC/software/QT/PuddleDetection/quant_models</string></property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btn_quantSelectOutput">
+                 <property name="text"><string>📂 浏览</string></property>
+                 <property name="maximumWidth"><number>80</number></property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+
+             <!-- 量化类型 -->
+             <item row="3" column="0">
+              <widget class="QLabel"><property name="text"><string>量化类型：</string></property></widget>
+             </item>
+             <item row="3" column="1">
+              <layout class="QHBoxLayout">
+               <item>
+                <widget class="QComboBox" name="combo_quantType">
+                 <item><property name="text"><string>dynamic（动态量化，仅量化权重）</string></property></item>
+                 <item><property name="text"><string>static（静态量化，需校准图片）</string></property></item>
+                </widget>
+               </item>
+               <item>
+                <spacer>
+                 <property name="orientation">horizontal</property>
+                 <property name="sizeHint"><size><width>40</width><height>0</height></size></property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+
+             <!-- Python 路径（复用训练页的） -->
+             <item row="4" column="0">
+              <widget class="QLabel"><property name="text"><string>Python 解释器：</string></property></widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QLabel" name="label_quantPythonHint">
+               <property name="text"><string>（使用「训练」页签中设置的 Python 路径）</string></property>
+               <property name="styleSheet"><string>color: #888; font-size: 11px;</string></property>
+              </widget>
+             </item>
+
+            </layout>
+           </widget>
+          </item>
+
+          <!-- ====== 右侧：推理区域 ====== -->
+          <item>
+           <widget class="QGroupBox" name="groupBox_inferParams">
+            <property name="title"><string>🔍 量化模型推理</string></property>
+            <layout class="QFormLayout" name="formLayout_infer">
+             <property name="leftMargin"><number>10</number></property>
+             <property name="topMargin"><number>10</number></property>
+             <property name="rightMargin"><number>10</number></property>
+             <property name="bottomMargin"><number>10</number></property>
+             <property name="horizontalSpacing"><number>10</number></property>
+             <property name="verticalSpacing"><number>8</number></property>
+
+             <!-- 量化模型路径 -->
+             <item row="0" column="0">
+              <widget class="QLabel"><property name="text"><string>量化模型 (.onnx)：</string></property></widget>
+             </item>
+             <item row="0" column="1">
+              <layout class="QHBoxLayout">
+               <item>
+                <widget class="QLineEdit" name="lineEdit_inferModel">
+                 <property name="placeholderText"><string>选择量化后的 .onnx 文件（量化完成后自动填入）</string></property>
+                 <property name="readOnly"><bool>true</bool></property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btn_inferSelectModel">
+                 <property name="text"><string>📂 浏览</string></property>
+                 <property name="maximumWidth"><number>80</number></property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+
+             <!-- 推理图片 -->
+             <item row="1" column="0">
+              <widget class="QLabel"><property name="text"><string>推理图片：</string></property></widget>
+             </item>
+             <item row="1" column="1">
+              <layout class="QHBoxLayout">
+               <item>
+                <widget class="QLineEdit" name="lineEdit_inferImage">
+                 <property name="placeholderText"><string>选择要检测的图片...</string></property>
+                 <property name="readOnly"><bool>true</bool></property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="btn_inferSelectImage">
+                 <property name="text"><string>🖼 浏览</string></property>
+                 <property name="maximumWidth"><number>80</number></property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+
+             <!-- 推理引擎选择 -->
+             <item row="2" column="0">
+              <widget class="QLabel"><property name="text"><string>推理引擎：</string></property></widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QComboBox" name="combo_inferEngine">
+               <item><property name="text"><string>Python (onnxruntime)</string></property></item>
+               <item><property name="text"><string>C++ (onnxruntime)</string></property></item>
+              </widget>
+             </item>
+
+             <!-- 置信度 -->
+             <item row="3" column="0">
+              <widget class="QLabel"><property name="text"><string>置信度阈值：</string></property></widget>
+             </item>
+             <item row="3" column="1">
+              <layout class="QHBoxLayout">
+               <item>
+                <widget class="QDoubleSpinBox" name="spin_inferConf">
+                 <property name="minimum"><double>0.01</double></property>
+                 <property name="maximum"><double>1.00</double></property>
+                 <property name="singleStep"><double>0.05</double></property>
+                 <property name="value"><double>0.25</double></property>
+                 <property name="decimals"><number>2</number></property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel"><property name="text"><string>  IoU 阈值：</string></property></widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="spin_inferIou">
+                 <property name="minimum"><double>0.01</double></property>
+                 <property name="maximum"><double>1.00</double></property>
+                 <property name="singleStep"><double>0.05</double></property>
+                 <property name="value"><double>0.45</double></property>
+                 <property name="decimals"><number>2</number></property>
+                </widget>
+               </item>
+               <item>
+                <spacer>
+                 <property name="orientation">horizontal</property>
+                 <property name="sizeHint"><size><width>40</width><height>0</height></size></property>
+                </spacer>
+               </item>
+              </layout>
+             </item>
+
+             <!-- 推理结果统计 -->
+             <item row="4" column="0">
+              <widget class="QLabel"><property name="text"><string>检测结果：</string></property></widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QLabel" name="label_inferResult">
+               <property name="text"><string>尚未推理</string></property>
+               <property name="styleSheet"><string>color: #888; font-weight: bold;</string></property>
+              </widget>
+             </item>
+
+            </layout>
+           </widget>
+          </item>
+
+         </layout>
+        </item>
+
+        <!-- 控制按钮行 -->
+        <item>
+         <layout class="QHBoxLayout" name="hLayout_quantCtrl">
+          <item>
+           <widget class="QPushButton" name="btn_quantStart">
+            <property name="text"><string>⚡ 开始量化</string></property>
+            <property name="minimumHeight"><number>36</number></property>
+            <property name="styleSheet">
+             <string>QPushButton { background-color: #9C27B0; color: white; font-size: 14px; font-weight: bold; border-radius: 6px; }
+QPushButton:hover { background-color: #7B1FA2; }
+QPushButton:disabled { background-color: #aaa; }</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_quantStop">
+            <property name="text"><string>⏹ 停止量化</string></property>
+            <property name="enabled"><bool>false</bool></property>
+            <property name="minimumHeight"><number>36</number></property>
+            <property name="styleSheet">
+             <string>QPushButton { background-color: #f44336; color: white; font-size: 14px; font-weight: bold; border-radius: 6px; }
+QPushButton:hover { background-color: #d32f2f; }
+QPushButton:disabled { background-color: #aaa; }</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_quantClearLog">
+            <property name="text"><string>🗑 清空日志</string></property>
+            <property name="minimumHeight"><number>36</number></property>
+            <property name="maximumWidth"><number>110</number></property>
+            <property name="styleSheet">
+             <string>QPushButton { background-color: #607D8B; color: white; font-size: 13px; border-radius: 6px; }
+QPushButton:hover { background-color: #455A64; }</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer>
+            <property name="orientation">horizontal</property>
+            <property name="sizeHint"><size><width>20</width><height>0</height></size></property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_inferRun">
+            <property name="text"><string>🚀 运行推理</string></property>
+            <property name="minimumHeight"><number>36</number></property>
+            <property name="styleSheet">
+             <string>QPushButton { background-color: #2196F3; color: white; font-size: 14px; font-weight: bold; border-radius: 6px; }
+QPushButton:hover { background-color: #1976D2; }
+QPushButton:disabled { background-color: #aaa; }</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+
+        <!-- 量化进度条 -->
+        <item>
+         <layout class="QHBoxLayout">
+          <item>
+           <widget class="QLabel">
+            <property name="text"><string>量化进度：</string></property>
+            <property name="minimumWidth"><number>70</number></property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QProgressBar" name="progressBar_quant">
+            <property name="minimum"><number>0</number></property>
+            <property name="maximum"><number>0</number></property>
+            <property name="value"><number>0</number></property>
+            <property name="textVisible"><bool>true</bool></property>
+            <property name="format"><string>%p%</string></property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_quantStatus">
+            <property name="text"><string>等待开始</string></property>
+            <property name="minimumWidth"><number>130</number></property>
+            <property name="alignment"><set>Qt::AlignCenter</set></property>
+            <property name="styleSheet"><string>color: #888; font-weight: bold;</string></property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+
+        <!-- 下半部分：左=量化日志  右=推理结果图像 -->
+        <item>
+         <layout class="QHBoxLayout" name="hLayout_quantBottom">
+          <property name="spacing"><number>8</number></property>
+
+          <!-- 量化日志 -->
+          <item>
+           <widget class="QGroupBox" name="groupBox_quantLog">
+            <property name="title"><string>📋 量化日志输出</string></property>
+            <layout class="QVBoxLayout">
+             <property name="leftMargin"><number>6</number></property>
+             <property name="topMargin"><number>6</number></property>
+             <property name="rightMargin"><number>6</number></property>
+             <property name="bottomMargin"><number>6</number></property>
+             <item>
+              <widget class="QPlainTextEdit" name="text_quantLog">
+               <property name="readOnly"><bool>true</bool></property>
+               <property name="minimumHeight"><number>160</number></property>
+               <property name="styleSheet">
+                <string>QPlainTextEdit { background-color: #1e1e1e; color: #d4d4d4; font-family: "Consolas", "Courier New", monospace; font-size: 12px; }</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+
+          <!-- 推理结果图像 -->
+          <item>
+           <widget class="QGroupBox" name="groupBox_inferResult">
+            <property name="title"><string>🖼 推理结果展示</string></property>
+            <property name="maximumWidth"><number>420</number></property>
+            <layout class="QVBoxLayout">
+             <property name="spacing"><number>6</number></property>
+             <property name="leftMargin"><number>6</number></property>
+             <property name="topMargin"><number>6</number></property>
+             <property name="rightMargin"><number>6</number></property>
+             <property name="bottomMargin"><number>6</number></property>
+             <item>
+              <widget class="QLabel" name="label_inferImage">
+               <property name="text"><string>（推理结果图像将在此显示）</string></property>
+               <property name="alignment"><set>Qt::AlignCenter</set></property>
+               <property name="minimumSize">
+                <size><width>360</width><height>220</height></size>
+               </property>
+               <property name="styleSheet">
+                <string>QLabel { background-color: #2a2a2a; color: #888; border: 1px solid #444; border-radius: 4px; }</string>
+               </property>
+               <property name="scaledContents"><bool>false</bool></property>
+              </widget>
+             </item>
+
+             <!-- 推理统计卡片行 -->
+             <item>
+              <layout class="QHBoxLayout">
+               <property name="spacing"><number>6</number></property>
+               <!-- 检测数量 -->
+               <item>
+                <widget class="QFrame" name="frame_inferCount">
+                 <property name="frameShape"><enum>QFrame::StyledPanel</enum></property>
+                 <property name="styleSheet"><string>QFrame { background: #E8F5E9; border-radius: 6px; border: 1px solid #A5D6A7; }</string></property>
+                 <layout class="QVBoxLayout">
+                  <property name="topMargin"><number>4</number></property>
+                  <property name="bottomMargin"><number>4</number></property>
+                  <item>
+                   <widget class="QLabel" name="label_inferCountVal">
+                    <property name="text"><string>--</string></property>
+                    <property name="alignment"><set>Qt::AlignCenter</set></property>
+                    <property name="styleSheet"><string>font-size: 22px; font-weight: bold; color: #2E7D32;</string></property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel">
+                    <property name="text"><string>检测数量</string></property>
+                    <property name="alignment"><set>Qt::AlignCenter</set></property>
+                    <property name="styleSheet"><string>font-size: 11px; color: #388E3C;</string></property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <!-- 最高置信度 -->
+               <item>
+                <widget class="QFrame" name="frame_inferMaxConf">
+                 <property name="frameShape"><enum>QFrame::StyledPanel</enum></property>
+                 <property name="styleSheet"><string>QFrame { background: #E3F2FD; border-radius: 6px; border: 1px solid #90CAF9; }</string></property>
+                 <layout class="QVBoxLayout">
+                  <property name="topMargin"><number>4</number></property>
+                  <property name="bottomMargin"><number>4</number></property>
+                  <item>
+                   <widget class="QLabel" name="label_inferMaxConfVal">
+                    <property name="text"><string>--</string></property>
+                    <property name="alignment"><set>Qt::AlignCenter</set></property>
+                    <property name="styleSheet"><string>font-size: 22px; font-weight: bold; color: #1565C0;</string></property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel">
+                    <property name="text"><string>最高置信度</string></property>
+                    <property name="alignment"><set>Qt::AlignCenter</set></property>
+                    <property name="styleSheet"><string>font-size: 11px; color: #1976D2;</string></property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <!-- 平均置信度 -->
+               <item>
+                <widget class="QFrame" name="frame_inferAvgConf">
+                 <property name="frameShape"><enum>QFrame::StyledPanel</enum></property>
+                 <property name="styleSheet"><string>QFrame { background: #FFF3E0; border-radius: 6px; border: 1px solid #FFCC80; }</string></property>
+                 <layout class="QVBoxLayout">
+                  <property name="topMargin"><number>4</number></property>
+                  <property name="bottomMargin"><number>4</number></property>
+                  <item>
+                   <widget class="QLabel" name="label_inferAvgConfVal">
+                    <property name="text"><string>--</string></property>
+                    <property name="alignment"><set>Qt::AlignCenter</set></property>
+                    <property name="styleSheet"><string>font-size: 22px; font-weight: bold; color: #E65100;</string></property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel">
+                    <property name="text"><string>平均置信度</string></property>
+                    <property name="alignment"><set>Qt::AlignCenter</set></property>
+                    <property name="styleSheet"><string>font-size: 11px; color: #F57C00;</string></property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </item>
+
+             <item>
+              <widget class="QPlainTextEdit" name="text_inferBoxes">
+               <property name="readOnly"><bool>true</bool></property>
+               <property name="maximumHeight"><number>80</number></property>
+               <property name="placeholderText"><string>检测框详情（标签 / 置信度 / 坐标）...</string></property>
+               <property name="styleSheet">
+                <string>QPlainTextEdit { background-color: #1e1e1e; color: #90EE90; font-family: "Consolas", monospace; font-size: 11px; }</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+
+         </layout>
+        </item>
+
+
+       </layout>
+      </widget>
+
+      <!-- ===== 页签4：数据库管理 ===== -->
+      <widget class="QWidget" name="tab_database">
+       <attribute name="title">
+        <string>📊 数据库管理</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="vLayout_database">
+        <property name="spacing"><number>8</number></property>
+        <property name="leftMargin"><number>8</number></property>
+        <property name="topMargin"><number>8</number></property>
+        <property name="rightMargin"><number>8</number></property>
+        <property name="bottomMargin"><number>8</number></property>
+
+        <!-- 顶部：统计概览卡片行 -->
+        <item>
+         <widget class="QGroupBox" name="groupBox_dbStats">
+          <property name="title"><string>📈 统计概览</string></property>
+          <layout class="QHBoxLayout" name="hLayout_dbStats">
+           <property name="spacing"><number>12</number></property>
+           <property name="leftMargin"><number>10</number></property>
+           <property name="topMargin"><number>8</number></property>
+           <property name="rightMargin"><number>10</number></property>
+           <property name="bottomMargin"><number>8</number></property>
+
+           <!-- 训练次数 -->
+           <item>
+            <widget class="QFrame" name="frame_trainCount">
+             <property name="frameShape"><enum>QFrame::StyledPanel</enum></property>
+             <property name="styleSheet"><string>QFrame { background-color: #E3F2FD; border-radius: 8px; border: 1px solid #90CAF9; }</string></property>
+             <layout class="QVBoxLayout">
+              <property name="leftMargin"><number>12</number></property>
+              <property name="topMargin"><number>8</number></property>
+              <property name="rightMargin"><number>12</number></property>
+              <property name="bottomMargin"><number>8</number></property>
+              <item>
+               <widget class="QLabel" name="label_statTrainCount">
+                <property name="text"><string>0</string></property>
+                <property name="alignment"><set>Qt::AlignCenter</set></property>
+                <property name="styleSheet"><string>font-size: 28px; font-weight: bold; color: #1565C0;</string></property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel">
+                <property name="text"><string>训练次数</string></property>
+                <property name="alignment"><set>Qt::AlignCenter</set></property>
+                <property name="styleSheet"><string>font-size: 12px; color: #1976D2;</string></property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+
+           <!-- 标注批次 -->
+           <item>
+            <widget class="QFrame" name="frame_annotCount">
+             <property name="frameShape"><enum>QFrame::StyledPanel</enum></property>
+             <property name="styleSheet"><string>QFrame { background-color: #E8F5E9; border-radius: 8px; border: 1px solid #A5D6A7; }</string></property>
+             <layout class="QVBoxLayout">
+              <property name="leftMargin"><number>12</number></property>
+              <property name="topMargin"><number>8</number></property>
+              <property name="rightMargin"><number>12</number></property>
+              <property name="bottomMargin"><number>8</number></property>
+              <item>
+               <widget class="QLabel" name="label_statAnnotCount">
+                <property name="text"><string>0</string></property>
+                <property name="alignment"><set>Qt::AlignCenter</set></property>
+                <property name="styleSheet"><string>font-size: 28px; font-weight: bold; color: #2E7D32;</string></property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel">
+                <property name="text"><string>标注批次</string></property>
+                <property name="alignment"><set>Qt::AlignCenter</set></property>
+                <property name="styleSheet"><string>font-size: 12px; color: #388E3C;</string></property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+
+           <!-- 量化次数 -->
+           <item>
+            <widget class="QFrame" name="frame_quantCount">
+             <property name="frameShape"><enum>QFrame::StyledPanel</enum></property>
+             <property name="styleSheet"><string>QFrame { background-color: #F3E5F5; border-radius: 8px; border: 1px solid #CE93D8; }</string></property>
+             <layout class="QVBoxLayout">
+              <property name="leftMargin"><number>12</number></property>
+              <property name="topMargin"><number>8</number></property>
+              <property name="rightMargin"><number>12</number></property>
+              <property name="bottomMargin"><number>8</number></property>
+              <item>
+               <widget class="QLabel" name="label_statQuantCount">
+                <property name="text"><string>0</string></property>
+                <property name="alignment"><set>Qt::AlignCenter</set></property>
+                <property name="styleSheet"><string>font-size: 28px; font-weight: bold; color: #6A1B9A;</string></property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel">
+                <property name="text"><string>量化次数</string></property>
+                <property name="alignment"><set>Qt::AlignCenter</set></property>
+                <property name="styleSheet"><string>font-size: 12px; color: #7B1FA2;</string></property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+
+           <!-- 推理次数 -->
+           <item>
+            <widget class="QFrame" name="frame_inferCount">
+             <property name="frameShape"><enum>QFrame::StyledPanel</enum></property>
+             <property name="styleSheet"><string>QFrame { background-color: #FFF3E0; border-radius: 8px; border: 1px solid #FFCC80; }</string></property>
+             <layout class="QVBoxLayout">
+              <property name="leftMargin"><number>12</number></property>
+              <property name="topMargin"><number>8</number></property>
+              <property name="rightMargin"><number>12</number></property>
+              <property name="bottomMargin"><number>8</number></property>
+              <item>
+               <widget class="QLabel" name="label_statInferCount">
+                <property name="text"><string>0</string></property>
+                <property name="alignment"><set>Qt::AlignCenter</set></property>
+                <property name="styleSheet"><string>font-size: 28px; font-weight: bold; color: #E65100;</string></property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel">
+                <property name="text"><string>推理次数</string></property>
+                <property name="alignment"><set>Qt::AlignCenter</set></property>
+                <property name="styleSheet"><string>font-size: 12px; color: #EF6C00;</string></property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+
+           <!-- 平均 mAP50 -->
+           <item>
+            <widget class="QFrame" name="frame_avgMap">
+             <property name="frameShape"><enum>QFrame::StyledPanel</enum></property>
+             <property name="styleSheet"><string>QFrame { background-color: #FCE4EC; border-radius: 8px; border: 1px solid #F48FB1; }</string></property>
+             <layout class="QVBoxLayout">
+              <property name="leftMargin"><number>12</number></property>
+              <property name="topMargin"><number>8</number></property>
+              <property name="rightMargin"><number>12</number></property>
+              <property name="bottomMargin"><number>8</number></property>
+              <item>
+               <widget class="QLabel" name="label_statAvgMap">
+                <property name="text"><string>N/A</string></property>
+                <property name="alignment"><set>Qt::AlignCenter</set></property>
+                <property name="styleSheet"><string>font-size: 28px; font-weight: bold; color: #880E4F;</string></property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel">
+                <property name="text"><string>平均 mAP50</string></property>
+                <property name="alignment"><set>Qt::AlignCenter</set></property>
+                <property name="styleSheet"><string>font-size: 12px; color: #AD1457;</string></property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+
+           <!-- 平均置信度 -->
+           <item>
+            <widget class="QFrame" name="frame_avgConf">
+             <property name="frameShape"><enum>QFrame::StyledPanel</enum></property>
+             <property name="styleSheet"><string>QFrame { background-color: #E0F7FA; border-radius: 8px; border: 1px solid #80DEEA; }</string></property>
+             <layout class="QVBoxLayout">
+              <property name="leftMargin"><number>12</number></property>
+              <property name="topMargin"><number>8</number></property>
+              <property name="rightMargin"><number>12</number></property>
+              <property name="bottomMargin"><number>8</number></property>
+              <item>
+               <widget class="QLabel" name="label_statAvgConf">
+                <property name="text"><string>N/A</string></property>
+                <property name="alignment"><set>Qt::AlignCenter</set></property>
+                <property name="styleSheet"><string>font-size: 28px; font-weight: bold; color: #006064;</string></property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel">
+                <property name="text"><string>平均置信度</string></property>
+                <property name="alignment"><set>Qt::AlignCenter</set></property>
+                <property name="styleSheet"><string>font-size: 12px; color: #00838F;</string></property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+
+          </layout>
+         </widget>
+        </item>
+
+        <!-- 中部：查询控制区 + 数据类型选择 -->
+        <item>
+         <layout class="QHBoxLayout" name="hLayout_dbQuery">
+          <property name="spacing"><number>8</number></property>
+
+          <item>
+           <widget class="QLabel">
+            <property name="text"><string>数据类型：</string></property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="combo_dbTable">
+            <item><property name="text"><string>📋 训练记录</string></property></item>
+            <item><property name="text"><string>🏷 标注统计</string></property></item>
+            <item><property name="text"><string>⚡ 量化记录</string></property></item>
+            <item><property name="text"><string>🔍 推理结果</string></property></item>
+           </widget>
+          </item>
+
+          <item>
+           <widget class="QLabel">
+            <property name="text"><string>  状态筛选：</string></property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="combo_dbStatus">
+            <item><property name="text"><string>全部</string></property></item>
+            <item><property name="text"><string>completed</string></property></item>
+            <item><property name="text"><string>failed</string></property></item>
+            <item><property name="text"><string>stopped</string></property></item>
+           </widget>
+          </item>
+
+          <item>
+           <spacer>
+            <property name="orientation">horizontal</property>
+            <property name="sizeHint"><size><width>20</width><height>0</height></size></property>
+           </spacer>
+          </item>
+
+          <item>
+           <widget class="QPushButton" name="btn_dbRefresh">
+            <property name="text"><string>🔄 刷新数据</string></property>
+            <property name="minimumHeight"><number>32</number></property>
+            <property name="styleSheet">
+             <string>QPushButton { background-color: #2196F3; color: white; font-weight: bold; border-radius: 5px; padding: 0 12px; }
+QPushButton:hover { background-color: #1976D2; }</string>
+            </property>
+           </widget>
+          </item>
+
+          <item>
+           <widget class="QPushButton" name="btn_dbExport">
+            <property name="text"><string>💾 导出 CSV</string></property>
+            <property name="minimumHeight"><number>32</number></property>
+            <property name="styleSheet">
+             <string>QPushButton { background-color: #4CAF50; color: white; font-weight: bold; border-radius: 5px; padding: 0 12px; }
+QPushButton:hover { background-color: #388E3C; }</string>
+            </property>
+           </widget>
+          </item>
+
+          <item>
+           <widget class="QPushButton" name="btn_dbSaveAnnot">
+            <property name="text"><string>📝 保存标注统计</string></property>
+            <property name="minimumHeight"><number>32</number></property>
+            <property name="toolTip"><string>将当前标注页签的统计信息保存到数据库</string></property>
+            <property name="styleSheet">
+             <string>QPushButton { background-color: #009688; color: white; font-weight: bold; border-radius: 5px; padding: 0 12px; }
+QPushButton:hover { background-color: #00796B; }</string>
+            </property>
+           </widget>
+          </item>
+
+         </layout>
+        </item>
+
+        <!-- 数据表格 -->
+        <item>
+         <widget class="QTableWidget" name="tableWidget_dbResult">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>1</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size><width>16777215</width><height>200</height></size>
+          </property>
+          <property name="alternatingRowColors"><bool>true</bool></property>
+          <property name="selectionBehavior"><enum>QAbstractItemView::SelectRows</enum></property>
+          <property name="editTriggers"><set>QAbstractItemView::NoEditTriggers</set></property>
+          <property name="styleSheet">
+           <string>QTableWidget { font-size: 12px; }
+QHeaderView::section { background-color: #37474F; color: white; font-weight: bold; padding: 4px; border: none; }</string>
+          </property>
+         </widget>
+        </item>
+
+
+
+       </layout>
+      </widget>
+
+     </widget>
+    </item>
+
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>AnnotationView</class>
+   <extends>QWidget</extends>
+   <header>annotationview.h</header>
+   <container>0</container>
+  </customwidget>
+  <customwidget>
+   <class>LossCurveView</class>
+   <extends>QWidget</extends>
+   <header>losscurveview.h</header>
+   <container>0</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
